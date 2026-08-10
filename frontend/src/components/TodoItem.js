@@ -17,7 +17,7 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
                 {isEditing ? (
                     <input type="text" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} className="border p-1 text-black" />
                 ) : (
-                    <span className={	ext-black ${todo.is_completed ? 'line-through text-gray-500' : ''}`}>{todo.title}</span>
+                    <span className={`text-black ${todo.is_completed ? 'line-through text-gray-500' : ''}`}>{todo.title}</span>
                 )}
             </div>
             <div className="flex gap-2">
