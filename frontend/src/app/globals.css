@@ -1,3 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #F8E7C9;
+  color: #064E3B;
+}
+
+::selection {
+  background-color: #064E3B;
+  color: #F8E7C9;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #064E3B !important;
+  box-shadow: 0 0 0 2px rgba(6, 78, 59, 0.2);
+}
