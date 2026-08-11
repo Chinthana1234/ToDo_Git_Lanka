@@ -1,25 +1,39 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
+    const [submitting, setSubmitting] = useState(false);
+    const { user, loading: authLoading, login } = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!authLoading && user) {
+            router.push('/dashboard');
+        }
+    }, [user, authLoading, router]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
+        setSubmitting(true);
         setError('');
         try {
             await login(email, password);
         } catch (err) {
-            setError('Invalid credentials. Please check your email and password.');
+            if (err.response?.data?.message) {
+                setError(err.response.data.message);
+            } else if (err.code === 'ERR_NETWORK' || !err.response) {
+                setError('Cannot connect to backend server. Please ensure the Laravel backend is running on http://localhost:8000.');
+            } else {
+                setError('Invalid credentials. Please check your email and password.');
+            }
         } finally {
-            setLoading(false);
+            setSubmitting(false);
         }
     };
 
@@ -96,10 +110,10 @@ export default function Login() {
 
                         <button
                             type="submit"
-                            disabled={loading}
+                            disabled={submitting}
                             className="w-full bg-[#064E3B] hover:bg-black text-white py-3.5 rounded-lg text-xs font-bold tracking-widest uppercase transition-all duration-200 shadow-md active:scale-[0.99] disabled:opacity-60 cursor-pointer"
                         >
-                            {loading ? 'SIGNING IN...' : 'SIGN IN'}
+                            {submitting ? 'SIGNING IN...' : 'SIGN IN'}
                         </button>
                     </form>
 

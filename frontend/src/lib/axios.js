@@ -17,4 +17,15 @@ axiosInstance.interceptors.request.use((config) => {
     return config;
 });
 
+axiosInstance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (typeof window !== 'undefined' && error.response && error.response.status === 401) {
+            localStorage.removeItem('token');
+            window.dispatchEvent(new Event('auth-logout'));
+        }
+        return Promise.reject(error);
+    }
+);
+
 export default axiosInstance;

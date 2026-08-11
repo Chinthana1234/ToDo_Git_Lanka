@@ -1,6 +1,7 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function Register() {
@@ -8,19 +9,35 @@ export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
-    const { register } = useAuth();
+    const [submitting, setSubmitting] = useState(false);
+    const { user, loading: authLoading, register } = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!authLoading && user) {
+            router.push('/dashboard');
+        }
+    }, [user, authLoading, router]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
+        setSubmitting(true);
         setError('');
         try {
             await register(name, email, password);
         } catch (err) {
-            setError('Registration failed. Email may already be in use.');
+            if (err.response?.data?.errors) {
+                const messages = Object.values(err.response.data.errors).flat().join(' ');
+                setError(messages);
+            } else if (err.response?.data?.message) {
+                setError(err.response.data.message);
+            } else if (err.code === 'ERR_NETWORK' || !err.response) {
+                setError('Cannot connect to backend server. Please ensure the Laravel backend is running on http://localhost:8000.');
+            } else {
+                setError('Registration failed. Please check your connection and details.');
+            }
         } finally {
-            setLoading(false);
+            setSubmitting(false);
         }
     };
 
@@ -116,10 +133,10 @@ export default function Register() {
 
                         <button
                             type="submit"
-                            disabled={loading}
+                            disabled={submitting}
                             className="w-full bg-[#064E3B] hover:bg-black text-white py-3.5 rounded-lg text-xs font-bold tracking-widest uppercase transition-all duration-200 shadow-md active:scale-[0.99] disabled:opacity-60 cursor-pointer mt-2"
                         >
-                            {loading ? 'CREATING ACCOUNT...' : 'CREATE ACCOUNT'}
+                            {submitting ? 'CREATING ACCOUNT...' : 'CREATE ACCOUNT'}
                         </button>
                     </form>
 

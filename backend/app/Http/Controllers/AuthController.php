@@ -15,17 +15,24 @@ class AuthController extends Controller {
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
+            'password' => $validated['password'],
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json(['access_token' => $token, 'token_type' => 'Bearer']);
     }
 
     public function login(Request $request) {
-        if (!auth()->attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'Invalid login details'], 401);
+        $validated = $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+
+        $user = User::where('email', $validated['email'])->first();
+
+        if (!$user || !Hash::check($validated['password'], $user->password)) {
+            return response()->json(['message' => 'Invalid email or password.'], 401);
         }
-        $user = User::where('email', $request['email'])->firstOrFail();
+
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json(['access_token' => $token, 'token_type' => 'Bearer']);
     }

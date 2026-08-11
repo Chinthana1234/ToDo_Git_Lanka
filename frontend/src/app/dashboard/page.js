@@ -8,7 +8,7 @@ import TodoItem from '../../components/TodoItem';
 import Navbar from '../../components/Navbar';
 
 export default function Dashboard() {
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
     const router = useRouter();
     const [todos, setTodos] = useState([]);
     const [search, setSearch] = useState('');
@@ -24,12 +24,14 @@ export default function Dashboard() {
     }, [search, filter]);
 
     useEffect(() => {
-        if (!user) {
+        if (!loading && !user) {
             router.push('/login');
             return;
         }
-        fetchTodos();
-    }, [user, router, fetchTodos]);
+        if (user) {
+            fetchTodos();
+        }
+    }, [user, loading, router, fetchTodos]);
 
     const handleAdd = (newTodo) => setTodos([newTodo, ...todos]);
 
