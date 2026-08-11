@@ -41,11 +41,8 @@ export default function Login() {
         <div className="min-h-screen w-full flex bg-white font-sans text-emerald-950">
             <div className="w-full lg:w-1/2 flex flex-col justify-between items-center p-8 sm:p-14 lg:p-20 min-h-screen bg-white">
                 <div className="w-full max-w-lg flex justify-start">
-                    <Link href="/" className="inline-flex items-center gap-3 text-2xl font-bold tracking-tight text-emerald-900">
-                        <span className="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-extrabold text-base shadow-sm">
-                            ✓
-                        </span>
-                        <span>Todo App</span>
+                    <Link href="/" className="inline-block text-2xl font-bold tracking-tight text-emerald-900">
+                        Todo App
                     </Link>
                 </div>
 

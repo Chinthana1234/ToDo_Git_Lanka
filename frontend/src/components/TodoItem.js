@@ -94,18 +94,18 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
 
     return (
         <>
-            <div className={`rounded-2xl border transition-all overflow-hidden ${todo.is_completed ? 'bg-emerald-50/40 border-emerald-200/60' : 'bg-slate-50 border-slate-200 hover:bg-white hover:border-[#064E3B]/30 hover:shadow-md'}`}>
+            <div className={`rounded-none border transition-all overflow-hidden ${todo.is_completed ? 'bg-emerald-50/40 border-emerald-200/60' : 'bg-slate-50 border-slate-200 hover:bg-white hover:border-[#064E3B]/30 hover:shadow-md'}`}>
                 {/* Image Banner */}
                 {!isEditing && todo.image_url && (
                     <button
                         type="button"
                         onClick={() => setShowFullImage(true)}
-                        className="w-full block cursor-pointer border-0 p-0 bg-transparent"
+                        className="w-full block cursor-pointer border-0 p-0 bg-transparent rounded-none"
                     >
                         <img
                             src={todo.image_url}
                             alt={todo.title}
-                            className="w-full h-36 object-cover"
+                            className="w-full h-36 object-cover rounded-none"
                         />
                     </button>
                 )}
@@ -114,19 +114,17 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
                     {isEditing ? (
                         /* ===== EDIT MODE ===== */
                         <div className="space-y-3">
-                            {/* Edit Title */}
                             <div>
                                 <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Title</label>
                                 <input
                                     type="text"
                                     value={editTitle}
                                     onChange={(e) => setEditTitle(e.target.value)}
-                                    className="w-full px-3 py-2.5 bg-white border border-[#064E3B] rounded-lg text-sm text-gray-900 outline-none"
+                                    className="w-full px-3 py-2.5 bg-white border border-[#064E3B] rounded-none text-sm text-gray-900 outline-none"
                                     autoFocus
                                 />
                             </div>
 
-                            {/* Edit Description */}
                             <div>
                                 <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Description</label>
                                 <textarea
@@ -134,27 +132,25 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
                                     onChange={(e) => setEditDescription(e.target.value)}
                                     placeholder="Add a description..."
                                     rows={3}
-                                    className="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 outline-none focus:border-[#064E3B] resize-none"
+                                    className="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-none text-sm text-gray-900 placeholder-gray-400 outline-none focus:border-[#064E3B] resize-none"
                                 />
                             </div>
 
-                            {/* Edit Due Date */}
                             <div>
                                 <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Due Date & Time</label>
                                 <input
                                     type="datetime-local"
                                     value={editDueDate}
                                     onChange={(e) => setEditDueDate(e.target.value)}
-                                    className="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-gray-900 outline-none focus:border-[#064E3B] cursor-pointer"
+                                    className="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-none text-sm text-gray-900 outline-none focus:border-[#064E3B] cursor-pointer"
                                 />
                             </div>
 
-                            {/* Edit Image */}
                             <div>
                                 <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Image</label>
                                 {currentImageUrl ? (
                                     <div className="relative group">
-                                        <img src={currentImageUrl} alt="Preview" className="w-full h-24 object-cover rounded-lg border border-slate-200" />
+                                        <img src={currentImageUrl} alt="Preview" className="w-full h-24 object-cover rounded-none border border-slate-200" />
                                         <button
                                             type="button"
                                             onClick={() => {
@@ -163,13 +159,13 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
                                                 setRemoveImage(true);
                                                 if (fileInputRef.current) fileInputRef.current.value = '';
                                             }}
-                                            className="absolute top-1.5 right-1.5 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                                            className="absolute top-1.5 right-1.5 w-6 h-6 bg-red-500 text-white rounded-none flex items-center justify-center text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                                         >
                                             ✕
                                         </button>
                                     </div>
                                 ) : (
-                                    <label className="flex items-center justify-center gap-2 w-full h-20 bg-white border-2 border-dashed border-slate-300 rounded-lg cursor-pointer hover:border-[#064E3B] hover:bg-[#064E3B]/5 transition-all">
+                                    <label className="flex items-center justify-center gap-2 w-full h-20 bg-white border-2 border-dashed border-slate-300 rounded-none cursor-pointer hover:border-[#064E3B] hover:bg-[#064E3B]/5 transition-all">
                                         <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                         </svg>
@@ -185,17 +181,16 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
                                 )}
                             </div>
 
-                            {/* Save/Cancel */}
                             <div className="flex items-center gap-2 pt-2">
                                 <button
                                     onClick={handleSave}
-                                    className="px-4 py-2 bg-[#064E3B] text-white rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-[#04382a] transition-colors cursor-pointer"
+                                    className="px-4 py-2 bg-[#064E3B] text-white rounded-none text-xs font-bold uppercase tracking-wider hover:bg-[#04382a] transition-colors cursor-pointer"
                                 >
                                     Save
                                 </button>
                                 <button
                                     onClick={handleCancel}
-                                    className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-gray-300 transition-colors cursor-pointer"
+                                    className="px-4 py-2 bg-gray-200 text-gray-700 rounded-none text-xs font-bold uppercase tracking-wider hover:bg-gray-300 transition-colors cursor-pointer"
                                 >
                                     Cancel
                                 </button>
@@ -207,7 +202,7 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
                             <div className="flex items-start gap-3.5 mb-3">
                                 <button
                                     onClick={() => onUpdate(todo.id, { is_completed: !todo.is_completed })}
-                                    className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-all cursor-pointer ${todo.is_completed ? 'bg-[#064E3B] border-[#064E3B] text-white' : 'border-gray-300 bg-white hover:border-[#064E3B]'}`}
+                                    className={`w-6 h-6 rounded-none border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-all cursor-pointer ${todo.is_completed ? 'bg-[#064E3B] border-[#064E3B] text-white' : 'border-gray-300 bg-white hover:border-[#064E3B]'}`}
                                 >
                                     {todo.is_completed && (
                                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -228,19 +223,19 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
                                     )}
 
                                     <div className="flex flex-wrap items-center gap-2 mt-2.5">
-                                        <span className={`inline-block text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md ${todo.is_completed ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
+                                        <span className={`inline-block text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-none ${todo.is_completed ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
                                             {todo.is_completed ? 'Completed' : 'Pending'}
                                         </span>
 
                                         {dueDateInfo && !todo.is_completed && (
-                                            <span className={`inline-flex items-center gap-1 text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-md ${dueDateInfo.color}`}>
+                                            <span className={`inline-flex items-center gap-1 text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-none ${dueDateInfo.color}`}>
                                                 <span>{dueDateInfo.icon}</span>
                                                 {dueDateInfo.text}
                                             </span>
                                         )}
 
                                         {dueDateInfo && todo.is_completed && (
-                                            <span className="inline-flex items-center gap-1 text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-md text-gray-400 bg-gray-100">
+                                            <span className="inline-flex items-center gap-1 text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-none text-gray-400 bg-gray-100">
                                                 📅 {dueDateInfo.text}
                                             </span>
                                         )}
@@ -252,7 +247,7 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
                             <div className="flex items-center gap-2 pt-3 border-t border-gray-200/60 justify-end">
                                 <button
                                     onClick={() => setIsEditing(true)}
-                                    className="px-3 py-1.5 text-gray-600 hover:text-[#064E3B] hover:bg-[#064E3B]/10 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                                    className="px-3 py-1.5 text-gray-600 hover:text-[#064E3B] hover:bg-[#064E3B]/10 rounded-none text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
                                 >
                                     Edit
                                 </button>
@@ -261,13 +256,13 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
                                         <span className="text-xs text-red-600 font-medium">Sure?</span>
                                         <button
                                             onClick={() => onDelete(todo.id)}
-                                            className="px-2.5 py-1.5 bg-red-500 text-white rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-red-600 transition-colors cursor-pointer"
+                                            className="px-2.5 py-1.5 bg-red-500 text-white rounded-none text-xs font-bold uppercase tracking-wider hover:bg-red-600 transition-colors cursor-pointer"
                                         >
                                             Yes
                                         </button>
                                         <button
                                             onClick={() => setConfirmDelete(false)}
-                                            className="px-2.5 py-1.5 bg-gray-200 text-gray-700 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-gray-300 transition-colors cursor-pointer"
+                                            className="px-2.5 py-1.5 bg-gray-200 text-gray-700 rounded-none text-xs font-bold uppercase tracking-wider hover:bg-gray-300 transition-colors cursor-pointer"
                                         >
                                             No
                                         </button>
@@ -275,7 +270,7 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
                                 ) : (
                                     <button
                                         onClick={() => setConfirmDelete(true)}
-                                        className="px-3 py-1.5 text-red-600 hover:bg-red-50 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                                        className="px-3 py-1.5 text-red-600 hover:bg-red-50 rounded-none text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
                                     >
                                         Delete
                                     </button>
@@ -296,11 +291,11 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
                         <img
                             src={todo.image_url}
                             alt={todo.title}
-                            className="w-full h-full object-contain rounded-2xl"
+                            className="w-full h-full object-contain rounded-none"
                         />
                         <button
                             onClick={() => setShowFullImage(false)}
-                            className="absolute top-3 right-3 w-10 h-10 bg-white/20 backdrop-blur-md text-white rounded-full flex items-center justify-center text-lg font-bold hover:bg-white/40 transition-all cursor-pointer"
+                            className="absolute top-3 right-3 w-10 h-10 bg-white/20 backdrop-blur-md text-white rounded-none flex items-center justify-center text-lg font-bold hover:bg-white/40 transition-all cursor-pointer"
                         >
                             ✕
                         </button>
