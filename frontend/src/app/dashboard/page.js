@@ -69,8 +69,8 @@ export default function Dashboard() {
         <div className="min-h-screen bg-white flex flex-col font-sans">
             <Navbar />
 
-            {/* Full Width Top Banner */}
-            <div className="w-full bg-gradient-to-r from-[#064E3B] to-[#0a6c52] text-white py-8 px-6 sm:px-10 shadow-md rounded-none mb-8">
+            {/* Top Banner */}
+            <div className="w-full bg-gradient-to-r from-[#064E3B] to-[#0a6c52] text-white py-8 px-6 sm:px-10 shadow-md rounded-none mb-10">
                 <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                     <div>
                         <span className="text-xs uppercase tracking-widest text-emerald-200 font-bold block mb-1">
@@ -97,41 +97,42 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            <main className="flex-1 w-full px-6 sm:px-10 pb-12">
-                <div className="w-full bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-[#064E3B]/10 space-y-8">
+            <main className="flex-1 w-full px-6 sm:px-10 pb-16">
+                <div className="w-full bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-[#064E3B]/10 space-y-10">
+
                     {/* Stats summary pill items */}
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-3 gap-4 sm:gap-6">
                         <div 
                             onClick={() => setFilter('all')}
-                            className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer text-center ${filter === 'all' ? 'bg-[#064E3B] text-white border-[#064E3B] shadow-md' : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-[#064E3B]/40'}`}
+                            className={`p-5 sm:p-6 rounded-2xl border transition-all cursor-pointer text-center ${filter === 'all' ? 'bg-[#064E3B] text-white border-[#064E3B] shadow-md' : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-[#064E3B]/40'}`}
                         >
                             <div className="text-2xl sm:text-3xl font-bold">{totalCount}</div>
-                            <div className="text-xs font-bold uppercase tracking-wider opacity-80 mt-1">All Tasks</div>
+                            <div className="text-xs font-bold uppercase tracking-wider opacity-80 mt-1.5">All Tasks</div>
                         </div>
                         <div 
                             onClick={() => setFilter('pending')}
-                            className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer text-center ${filter === 'pending' ? 'bg-[#064E3B] text-white border-[#064E3B] shadow-md' : 'bg-amber-50/60 border-amber-200 text-amber-900 hover:border-amber-400'}`}
+                            className={`p-5 sm:p-6 rounded-2xl border transition-all cursor-pointer text-center ${filter === 'pending' ? 'bg-[#064E3B] text-white border-[#064E3B] shadow-md' : 'bg-amber-50/60 border-amber-200 text-amber-900 hover:border-amber-400'}`}
                         >
                             <div className="text-2xl sm:text-3xl font-bold">{pendingCount}</div>
-                            <div className="text-xs font-bold uppercase tracking-wider opacity-80 mt-1">Pending</div>
+                            <div className="text-xs font-bold uppercase tracking-wider opacity-80 mt-1.5">Pending</div>
                         </div>
                         <div 
                             onClick={() => setFilter('completed')}
-                            className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer text-center ${filter === 'completed' ? 'bg-[#064E3B] text-white border-[#064E3B] shadow-md' : 'bg-emerald-50/60 border-emerald-200 text-emerald-900 hover:border-emerald-400'}`}
+                            className={`p-5 sm:p-6 rounded-2xl border transition-all cursor-pointer text-center ${filter === 'completed' ? 'bg-[#064E3B] text-white border-[#064E3B] shadow-md' : 'bg-emerald-50/60 border-emerald-200 text-emerald-900 hover:border-emerald-400'}`}
                         >
                             <div className="text-2xl sm:text-3xl font-bold">{completedCount}</div>
-                            <div className="text-xs font-bold uppercase tracking-wider opacity-80 mt-1">Completed</div>
+                            <div className="text-xs font-bold uppercase tracking-wider opacity-80 mt-1.5">Completed</div>
                         </div>
                     </div>
 
                     {/* Todo Add Form Section */}
-                    <div className="pt-2">
-                        <h2 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Add New Task</h2>
+                    <div className="pt-4 border-t border-gray-100">
+                        <h2 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">Add New Task</h2>
                         <TodoForm onTodoAdded={handleAdd} />
                     </div>
 
                     {/* Search & Filter Bar */}
-                    <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-100">
+                    <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-gray-100">
                         <div className="relative flex-1">
                             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -143,14 +144,14 @@ export default function Dashboard() {
                                 placeholder="Search by task name..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:bg-white focus:border-[#064E3B] transition-all outline-none"
+                                className="w-full pl-10 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:bg-white focus:border-[#064E3B] transition-all outline-none"
                             />
                         </div>
 
                         <select
                             value={filter}
                             onChange={(e) => setFilter(e.target.value)}
-                            className="px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-gray-800 font-medium focus:bg-white focus:border-[#064E3B] transition-all outline-none cursor-pointer"
+                            className="px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-gray-800 font-medium focus:bg-white focus:border-[#064E3B] transition-all outline-none cursor-pointer"
                         >
                             <option value="all">All Status</option>
                             <option value="pending">Pending Only</option>
@@ -159,7 +160,7 @@ export default function Dashboard() {
                     </div>
 
                     {/* Todo Items Grid */}
-                    <div className="pt-2">
+                    <div className="pt-4">
                         {todos.length === 0 ? (
                             <div className="text-center py-16 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
                                 <div className="w-16 h-16 bg-[#064E3B]/10 text-[#064E3B] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
@@ -171,7 +172,7 @@ export default function Dashboard() {
                                 </p>
                             </div>
                         ) : (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {todos.map((todo) => (
                                     <TodoItem key={todo.id} todo={todo} onUpdate={handleUpdate} onDelete={handleDelete} />
                                 ))}

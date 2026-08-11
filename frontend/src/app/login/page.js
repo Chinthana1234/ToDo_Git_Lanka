@@ -38,122 +38,100 @@ export default function Login() {
     };
 
     return (
-        <div className="min-h-screen w-full flex bg-white font-sans text-gray-800">
-            {/* Left Column - Form */}
-            <div className="w-full lg:w-1/2 flex flex-col justify-between p-6 sm:p-12 lg:p-16 xl:p-20">
-                {/* Brand Logo */}
-                <div>
-                    <Link href="/" className="inline-block text-xl font-bold tracking-tight text-[#064E3B]">
-                        Todo App
+        <div className="min-h-screen w-full flex bg-white font-sans text-emerald-950">
+            <div className="w-full lg:w-1/2 flex flex-col justify-between items-center p-8 sm:p-14 lg:p-20 min-h-screen bg-white">
+                <div className="w-full max-w-lg flex justify-start">
+                    <Link href="/" className="inline-flex items-center gap-3 text-2xl font-bold tracking-tight text-emerald-900">
+                        <span className="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-extrabold text-base shadow-sm">
+                            ✓
+                        </span>
+                        <span>Todo App</span>
                     </Link>
                 </div>
 
-                {/* Form Container */}
-                <div className="my-auto max-w-md w-full mx-auto py-8">
-                    <h1 className="text-3xl sm:text-4xl font-serif text-gray-900 mb-2">
-                        Welcome Back
-                    </h1>
-                    <p className="text-sm text-gray-500 mb-8">
-                        Please enter your details to sign in to your account.
-                    </p>
+                <div className="my-auto max-w-lg w-full py-8 space-y-8">
+                    <div>
+                        <h1 className="text-4xl sm:text-5xl font-extrabold text-emerald-950 mb-3 tracking-tight">
+                            Welcome Back
+                        </h1>
+                        <p className="text-base sm:text-lg text-emerald-700 font-medium">
+                            Please enter your details to sign in to your account.
+                        </p>
+                    </div>
 
                     {error && (
-                        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm">
+                        <div className="bg-emerald-50 border-2 border-emerald-400 text-emerald-950 px-5 py-4 rounded-2xl text-base font-semibold">
                             {error}
                         </div>
                     )}
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
-                            <label className="block text-[11px] font-bold tracking-widest text-gray-500 uppercase mb-2">
+                            <label className="block text-xs sm:text-sm font-bold tracking-wider text-emerald-900 uppercase mb-2.5">
                                 Email Address
                             </label>
-                            <div className="relative">
-                                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                                <input
-                                    type="email"
-                                    placeholder="admin@todoapp.com"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 bg-slate-100 border border-transparent rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:bg-white focus:border-[#064E3B] transition-all outline-none"
-                                    required
-                                />
-                            </div>
+                            <input
+                                type="email"
+                                placeholder="admin@todoapp.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full px-5 py-4 bg-white border-2 border-emerald-300 rounded-2xl text-base sm:text-lg text-emerald-950 font-medium placeholder-emerald-400 focus:outline-none focus:border-emerald-600 focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm"
+                                required
+                            />
                         </div>
 
                         <div>
-                            <div className="flex justify-between items-center mb-2">
-                                <label className="block text-[11px] font-bold tracking-widest text-gray-500 uppercase">
+                            <div className="flex justify-between items-center mb-2.5">
+                                <label className="block text-xs sm:text-sm font-bold tracking-wider text-emerald-900 uppercase">
                                     Password
                                 </label>
                             </div>
-                            <div className="relative">
-                                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                    </svg>
-                                </div>
-                                <input
-                                    type="password"
-                                    placeholder="••••••••"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 bg-slate-100 border border-transparent rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:bg-white focus:border-[#064E3B] transition-all outline-none"
-                                    required
-                                />
-                            </div>
+                            <input
+                                type="password"
+                                placeholder="••••••••"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="w-full px-5 py-4 bg-white border-2 border-emerald-300 rounded-2xl text-base sm:text-lg text-emerald-950 font-medium placeholder-emerald-400 focus:outline-none focus:border-emerald-600 focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm"
+                                required
+                            />
                         </div>
 
                         <button
                             type="submit"
                             disabled={submitting}
-                            className="w-full bg-[#064E3B] hover:bg-black text-white py-3.5 rounded-lg text-xs font-bold tracking-widest uppercase transition-all duration-200 shadow-md active:scale-[0.99] disabled:opacity-60 cursor-pointer"
+                            className="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-4 px-6 rounded-2xl text-base sm:text-lg font-bold tracking-widest uppercase transition-all duration-200 shadow-lg hover:shadow-xl active:scale-[0.99] disabled:opacity-60 cursor-pointer"
                         >
                             {submitting ? 'SIGNING IN...' : 'SIGN IN'}
                         </button>
                     </form>
 
-                    <div className="mt-8 text-center text-xs text-gray-600">
+                    <div className="pt-4 text-center text-sm sm:text-base text-emerald-800 font-medium">
                         New to Todo App?{' '}
-                        <Link href="/register" className="font-bold text-gray-900 hover:text-[#064E3B] transition-colors">
+                        <Link href="/register" className="font-extrabold text-emerald-950 underline hover:text-emerald-700 transition-colors">
                             Create an account
                         </Link>
                     </div>
                 </div>
 
-                {/* Footer copyright note */}
-                <div className="text-xs text-gray-400 text-center sm:text-left">
+                <div className="w-full max-w-lg text-sm text-emerald-700 text-center font-medium">
                     &copy; {new Date().getFullYear()} Todo App. All rights reserved.
                 </div>
             </div>
 
-            {/* Right Column - Luxury Visual Banner */}
-            <div className="hidden lg:flex lg:w-1/2 relative bg-[#064E3B] overflow-hidden items-center justify-center p-12">
-                {/* Background Image with Overlay */}
-                <div 
-                    className="absolute inset-0 bg-cover bg-center opacity-80"
-                    style={{ backgroundImage: "url('/todo_auth_bg.png')" }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#064E3B] via-[#064E3B]/50 to-transparent" />
-
-                {/* Content Overlay */}
+            <div className="hidden lg:flex lg:w-1/2 relative bg-emerald-900 items-center justify-center p-12">
                 <div className="relative z-10 text-center max-w-lg px-6 py-12">
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif tracking-widest text-[#F8E7C9] uppercase leading-tight mb-4 drop-shadow">
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-widest text-white uppercase leading-tight mb-4">
                         PRODUCTIVITY MASTERPIECE
                     </h2>
                     
                     <div className="flex items-center justify-center gap-3 my-6">
-                        <span className="w-12 h-[1px] bg-[#F8E7C9]/60"></span>
-                        <span className="text-[#F8E7C9] text-xs">✦</span>
-                        <span className="w-12 h-[1px] bg-[#F8E7C9]/60"></span>
+                        <span className="w-16 h-[2px] bg-emerald-300"></span>
+                        <span className="text-emerald-200 text-sm">✦</span>
+                        <span className="w-16 h-[2px] bg-emerald-300"></span>
                     </div>
 
-                    <p className="text-lg sm:text-xl font-serif italic text-[#F8E7C9]/90 tracking-wide">
-                        &ldquo;Organized with intent, accomplished with focus.&rdquo;
+                    <p className="text-lg sm:text-2xl font-medium text-emerald-100 tracking-wide">
+                        Organized with intent, accomplished with focus.
                     </p>
                 </div>
             </div>

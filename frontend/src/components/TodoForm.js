@@ -56,30 +56,30 @@ export default function TodoForm({ onTodoAdded }) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="flex flex-col sm:flex-row gap-3">
+        <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                 <input
                     type="text"
                     placeholder="What do you need to accomplish?"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     onFocus={() => setExpanded(true)}
-                    className="flex-1 px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:border-[#064E3B] focus:ring-2 focus:ring-[#064E3B]/10 transition-all outline-none"
+                    className="flex-1 min-w-0 px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:bg-white focus:border-[#064E3B] focus:ring-2 focus:ring-[#064E3B]/10 transition-all outline-none"
                     required
                 />
                 {!expanded && (
-                    <div className="flex items-center gap-2.5">
+                    <div className="flex items-center gap-3 flex-shrink-0">
                         <button
                             type="button"
                             onClick={() => setExpanded(true)}
-                            className="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-gray-700 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap border border-slate-200"
+                            className="px-4 py-3.5 bg-slate-100 hover:bg-slate-200 text-gray-700 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap border border-slate-200"
                         >
                             + Details
                         </button>
                         <button
                             type="submit"
                             disabled={loading}
-                            className="bg-[#064E3B] hover:bg-[#04382a] text-white px-5 py-3 rounded-xl font-bold text-xs tracking-wider uppercase transition-all shadow-md active:scale-[0.98] disabled:opacity-60 cursor-pointer whitespace-nowrap"
+                            className="bg-[#064E3B] hover:bg-[#04382a] text-white px-6 py-3.5 rounded-xl font-bold text-xs tracking-wider uppercase transition-all shadow-md active:scale-[0.98] disabled:opacity-60 cursor-pointer whitespace-nowrap"
                         >
                             {loading ? 'Adding...' : '+ Add Task'}
                         </button>
@@ -88,9 +88,9 @@ export default function TodoForm({ onTodoAdded }) {
             </div>
 
             {expanded && (
-                <div className="space-y-4 p-5 bg-slate-50/80 rounded-2xl border border-slate-200 animate-in">
+                <div className="space-y-5 p-6 bg-slate-50/90 rounded-2xl border border-slate-200 animate-in">
                     <div>
-                        <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1.5">
+                        <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">
                             Description
                         </label>
                         <textarea
@@ -102,9 +102,9 @@ export default function TodoForm({ onTodoAdded }) {
                         />
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
-                            <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1.5">
+                            <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">
                                 Due Date & Time
                             </label>
                             <input
@@ -116,7 +116,7 @@ export default function TodoForm({ onTodoAdded }) {
                         </div>
 
                         <div>
-                            <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1.5">
+                            <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">
                                 Attachment
                             </label>
                             {imagePreview ? (
@@ -152,7 +152,7 @@ export default function TodoForm({ onTodoAdded }) {
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-end gap-3 pt-2">
+                    <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-200/60">
                         <button
                             type="button"
                             onClick={() => {
@@ -161,14 +161,14 @@ export default function TodoForm({ onTodoAdded }) {
                                 setDueDate('');
                                 removeImage();
                             }}
-                            className="px-4 py-2.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
+                            className="px-5 py-3 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
                         >
                             Collapse
                         </button>
                         <button
                             type="submit"
                             disabled={loading}
-                            className="bg-[#064E3B] hover:bg-[#04382a] text-white px-6 py-2.5 rounded-xl font-bold text-xs tracking-wider uppercase transition-all shadow-md active:scale-[0.98] disabled:opacity-60 cursor-pointer"
+                            className="bg-[#064E3B] hover:bg-[#04382a] text-white px-6 py-3.5 rounded-xl font-bold text-xs tracking-wider uppercase transition-all shadow-md active:scale-[0.98] disabled:opacity-60 cursor-pointer"
                         >
                             {loading ? 'Adding...' : '+ Add Task'}
                         </button>
