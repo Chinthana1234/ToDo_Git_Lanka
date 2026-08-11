@@ -37,7 +37,14 @@ export default function Dashboard() {
 
     const handleUpdate = async (id, data) => {
         try {
-            const res = await axios.put(`/todos/${id}`, data);
+            let res;
+            if (data instanceof FormData) {
+                // Use POST route for multipart form data (file uploads)
+                res = await axios.post(`/todos/${id}/update`, data);
+            } else {
+                // Use PUT route for simple JSON updates (e.g. toggle completion)
+                res = await axios.put(`/todos/${id}`, data);
+            }
             setTodos(todos.map((t) => (t.id === id ? res.data : t)));
         } catch (error) {
             console.error(error);
