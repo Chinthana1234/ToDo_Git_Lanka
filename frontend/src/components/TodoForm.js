@@ -57,7 +57,6 @@ export default function TodoForm({ onTodoAdded }) {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Title Input */}
             <div className="flex flex-col sm:flex-row gap-3">
                 <input
                     type="text"
@@ -65,24 +64,31 @@ export default function TodoForm({ onTodoAdded }) {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     onFocus={() => setExpanded(true)}
-                    className="flex-1 px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:bg-white focus:border-[#064E3B] transition-all outline-none"
+                    className="flex-1 px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:border-[#064E3B] focus:ring-2 focus:ring-[#064E3B]/10 transition-all outline-none"
                     required
                 />
                 {!expanded && (
-                    <button
-                        type="button"
-                        onClick={() => setExpanded(true)}
-                        className="px-4 py-3.5 bg-slate-100 hover:bg-slate-200 text-gray-600 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap border border-slate-200"
-                    >
-                        + Details
-                    </button>
+                    <div className="flex items-center gap-2.5">
+                        <button
+                            type="button"
+                            onClick={() => setExpanded(true)}
+                            className="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-gray-700 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap border border-slate-200"
+                        >
+                            + Details
+                        </button>
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="bg-[#064E3B] hover:bg-[#04382a] text-white px-5 py-3 rounded-xl font-bold text-xs tracking-wider uppercase transition-all shadow-md active:scale-[0.98] disabled:opacity-60 cursor-pointer whitespace-nowrap"
+                        >
+                            {loading ? 'Adding...' : '+ Add Task'}
+                        </button>
+                    </div>
                 )}
             </div>
 
-            {/* Expanded Details */}
             {expanded && (
-                <div className="space-y-4 p-4 bg-slate-50/60 rounded-2xl border border-slate-200 animate-in">
-                    {/* Description */}
+                <div className="space-y-4 p-5 bg-slate-50/80 rounded-2xl border border-slate-200 animate-in">
                     <div>
                         <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1.5">
                             Description
@@ -97,7 +103,6 @@ export default function TodoForm({ onTodoAdded }) {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {/* Due Date & Time */}
                         <div>
                             <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1.5">
                                 Due Date & Time
@@ -110,28 +115,27 @@ export default function TodoForm({ onTodoAdded }) {
                             />
                         </div>
 
-                        {/* Image Upload */}
                         <div>
                             <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1.5">
                                 Attachment
                             </label>
                             {imagePreview ? (
-                                <div className="relative group">
+                                <div className="relative group inline-block">
                                     <img
                                         src={imagePreview}
                                         alt="Preview"
-                                        className="w-full h-24 object-cover rounded-xl border border-slate-200"
+                                        className="h-20 w-28 object-cover rounded-xl border border-slate-200"
                                     />
                                     <button
                                         type="button"
                                         onClick={removeImage}
-                                        className="absolute top-1.5 right-1.5 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                                        className="absolute -top-1.5 -right-1.5 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-xs font-bold shadow-md cursor-pointer"
                                     >
                                         ✕
                                     </button>
                                 </div>
                             ) : (
-                                <label className="flex items-center justify-center gap-2 w-full h-24 bg-white border-2 border-dashed border-slate-300 rounded-xl cursor-pointer hover:border-[#064E3B] hover:bg-[#064E3B]/5 transition-all">
+                                <label className="flex items-center justify-center gap-2 w-full h-20 bg-white border-2 border-dashed border-slate-300 rounded-xl cursor-pointer hover:border-[#064E3B] hover:bg-[#064E3B]/5 transition-all">
                                     <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
@@ -148,15 +152,7 @@ export default function TodoForm({ onTodoAdded }) {
                         </div>
                     </div>
 
-                    {/* Action Buttons */}
-                    <div className="flex items-center gap-3 pt-2">
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="bg-[#064E3B] hover:bg-[#04382a] text-white px-6 py-3 rounded-xl font-bold text-xs tracking-wider uppercase transition-all shadow-md active:scale-[0.98] disabled:opacity-60 cursor-pointer"
-                        >
-                            {loading ? 'Adding...' : '+ Add Task'}
-                        </button>
+                    <div className="flex items-center justify-end gap-3 pt-2">
                         <button
                             type="button"
                             onClick={() => {
@@ -165,24 +161,18 @@ export default function TodoForm({ onTodoAdded }) {
                                 setDueDate('');
                                 removeImage();
                             }}
-                            className="px-4 py-3 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
+                            className="px-4 py-2.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
                         >
                             Collapse
                         </button>
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="bg-[#064E3B] hover:bg-[#04382a] text-white px-6 py-2.5 rounded-xl font-bold text-xs tracking-wider uppercase transition-all shadow-md active:scale-[0.98] disabled:opacity-60 cursor-pointer"
+                        >
+                            {loading ? 'Adding...' : '+ Add Task'}
+                        </button>
                     </div>
-                </div>
-            )}
-
-            {/* Compact submit when not expanded */}
-            {!expanded && (
-                <div className="flex justify-end">
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="bg-[#064E3B] hover:bg-[#04382a] text-white px-6 py-3.5 rounded-xl font-bold text-xs tracking-wider uppercase transition-all shadow-md active:scale-[0.98] disabled:opacity-60 cursor-pointer whitespace-nowrap"
-                    >
-                        {loading ? 'Adding...' : '+ Add Task'}
-                    </button>
                 </div>
             )}
         </form>

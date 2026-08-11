@@ -6,18 +6,18 @@ export default function Navbar() {
     const { user, logout } = useAuth();
 
     return (
-        <nav className="bg-[#064E3B] text-white shadow-md border-b border-white/10">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-                <Link href="/dashboard" className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                    <span className="w-8 h-8 rounded-lg bg-[#F8E7C9] text-[#064E3B] flex items-center justify-center font-bold text-sm">
+        <nav className="bg-[#064E3B] text-white shadow-md border-b border-white/10 w-full">
+            <div className="w-full px-6 sm:px-10 py-4 flex items-center justify-between">
+                <Link href="/dashboard" className="text-xl font-bold tracking-tight text-white flex items-center gap-2.5">
+                    <span className="w-8 h-8 rounded-lg bg-emerald-100 text-[#064E3B] flex items-center justify-center font-bold text-sm">
                         ✓
                     </span>
-                    Todo App
+                    <span>Todo App</span>
                 </Link>
 
                 {user ? (
                     <div className="flex items-center gap-4">
-                        <div className="hidden sm:flex items-center gap-2 text-sm text-[#F8E7C9]">
+                        <div className="hidden sm:flex items-center gap-2 text-sm text-emerald-100">
                             <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
                             <span>{user.email}</span>
                         </div>
@@ -30,10 +30,10 @@ export default function Navbar() {
                     </div>
                 ) : (
                     <div className="flex items-center gap-3">
-                        <Link href="/login" className="text-xs font-bold uppercase tracking-wider text-[#F8E7C9] hover:underline px-3 py-2">
+                        <Link href="/login" className="text-xs font-bold uppercase tracking-wider text-emerald-100 hover:underline px-3 py-2">
                             Login
                         </Link>
-                        <Link href="/register" className="bg-[#F8E7C9] text-[#064E3B] px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors">
+                        <Link href="/register" className="bg-emerald-100 text-[#064E3B] px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors">
                             Register
                         </Link>
                     </div>
